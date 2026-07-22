@@ -1,0 +1,775 @@
+{
+  "dataset_summary": {
+    "total_rows": 891,
+    "class_counts": {
+      "0": 584,
+      "1": 307
+    },
+    "source_path": "data/raw/playstore_reviews.csv"
+  },
+  "split_settings": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "stratify": true,
+    "primary_metric": "f1_pos",
+    "tie_breaker": "accuracy"
+  },
+  "vectorizer_settings": {
+    "baseline": {
+      "type": "CountVectorizer",
+      "stop_words": "english",
+      "ngram_range": [
+        1,
+        1
+      ]
+    },
+    "enhanced": "Count/TF-IDF with unigram and bigram ranges",
+    "cv_folds": 5
+  },
+  "baseline_metrics": [
+    {
+      "model_name": "GaussianNB",
+      "accuracy": 0.8156424581005587,
+      "precision": 0.7636363636363637,
+      "recall": 0.6774193548387096,
+      "f1": 0.717948717948718,
+      "confusion_matrix": [
+        [
+          104,
+          13
+        ],
+        [
+          20,
+          42
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 0.8387096774193549,
+          "recall": 0.8888888888888888,
+          "f1-score": 0.8630705394190872,
+          "support": 117.0
+        },
+        "1": {
+          "precision": 0.7636363636363637,
+          "recall": 0.6774193548387096,
+          "f1-score": 0.717948717948718,
+          "support": 62.0
+        },
+        "accuracy": 0.8156424581005587,
+        "macro avg": {
+          "precision": 0.8011730205278593,
+          "recall": 0.7831541218637992,
+          "f1-score": 0.7905096286839026,
+          "support": 179.0
+        },
+        "weighted avg": {
+          "precision": 0.8127066301872574,
+          "recall": 0.8156424581005587,
+          "f1-score": 0.812804880585775,
+          "support": 179.0
+        }
+      },
+      "evaluation_type": "holdout"
+    },
+    {
+      "model_name": "MultinomialNB",
+      "accuracy": 0.8547486033519553,
+      "precision": 0.8913043478260869,
+      "recall": 0.6612903225806451,
+      "f1": 0.7592592592592593,
+      "confusion_matrix": [
+        [
+          112,
+          5
+        ],
+        [
+          21,
+          41
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 0.8421052631578947,
+          "recall": 0.9572649572649573,
+          "f1-score": 0.896,
+          "support": 117.0
+        },
+        "1": {
+          "precision": 0.8913043478260869,
+          "recall": 0.6612903225806451,
+          "f1-score": 0.7592592592592593,
+          "support": 62.0
+        },
+        "accuracy": 0.8547486033519553,
+        "macro avg": {
+          "precision": 0.8667048054919908,
+          "recall": 0.8092776399228012,
+          "f1-score": 0.8276296296296297,
+          "support": 179.0
+        },
+        "weighted avg": {
+          "precision": 0.8591462868977155,
+          "recall": 0.8547486033519553,
+          "f1-score": 0.8486372853300227,
+          "support": 179.0
+        }
+      },
+      "evaluation_type": "holdout"
+    },
+    {
+      "model_name": "BernoulliNB",
+      "accuracy": 0.7821229050279329,
+      "precision": 0.8709677419354839,
+      "recall": 0.43548387096774194,
+      "f1": 0.5806451612903226,
+      "confusion_matrix": [
+        [
+          113,
+          4
+        ],
+        [
+          35,
+          27
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 0.7635135135135135,
+          "recall": 0.9658119658119658,
+          "f1-score": 0.8528301886792453,
+          "support": 117.0
+        },
+        "1": {
+          "precision": 0.8709677419354839,
+          "recall": 0.43548387096774194,
+          "f1-score": 0.5806451612903226,
+          "support": 62.0
+        },
+        "accuracy": 0.7821229050279329,
+        "macro avg": {
+          "precision": 0.8172406277244987,
+          "recall": 0.7006479183898539,
+          "f1-score": 0.716737674984784,
+          "support": 179.0
+        },
+        "weighted avg": {
+          "precision": 0.8007322965423525,
+          "recall": 0.7821229050279329,
+          "f1-score": 0.7585538104774956,
+          "support": 179.0
+        }
+      },
+      "evaluation_type": "holdout"
+    },
+    {
+      "model_name": "RandomForestClassifier",
+      "accuracy": 0.8044692737430168,
+      "precision": 0.68,
+      "recall": 0.8225806451612904,
+      "f1": 0.7445255474452555,
+      "confusion_matrix": [
+        [
+          93,
+          24
+        ],
+        [
+          11,
+          51
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 0.8942307692307693,
+          "recall": 0.7948717948717948,
+          "f1-score": 0.8416289592760181,
+          "support": 117.0
+        },
+        "1": {
+          "precision": 0.68,
+          "recall": 0.8225806451612904,
+          "f1-score": 0.7445255474452555,
+          "support": 62.0
+        },
+        "accuracy": 0.8044692737430168,
+        "macro avg": {
+          "precision": 0.7871153846153847,
+          "recall": 0.8087262200165426,
+          "f1-score": 0.7930772533606367,
+          "support": 179.0
+        },
+        "weighted avg": {
+          "precision": 0.8200279329608938,
+          "recall": 0.8044692737430168,
+          "f1-score": 0.8079953752899439,
+          "support": 179.0
+        }
+      },
+      "evaluation_type": "holdout"
+    },
+    {
+      "model_name": "LogisticRegression",
+      "accuracy": 0.8324022346368715,
+      "precision": 0.75,
+      "recall": 0.7741935483870968,
+      "f1": 0.7619047619047619,
+      "confusion_matrix": [
+        [
+          101,
+          16
+        ],
+        [
+          14,
+          48
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 0.8782608695652174,
+          "recall": 0.8632478632478633,
+          "f1-score": 0.8706896551724138,
+          "support": 117.0
+        },
+        "1": {
+          "precision": 0.75,
+          "recall": 0.7741935483870968,
+          "f1-score": 0.7619047619047619,
+          "support": 62.0
+        },
+        "accuracy": 0.8324022346368715,
+        "macro avg": {
+          "precision": 0.8141304347826087,
+          "recall": 0.81872070581748,
+          "f1-score": 0.8162972085385878,
+          "support": 179.0
+        },
+        "weighted avg": {
+          "precision": 0.8338353169783824,
+          "recall": 0.8324022346368715,
+          "f1-score": 0.833009971470769,
+          "support": 179.0
+        }
+      },
+      "evaluation_type": "holdout"
+    },
+    {
+      "model_name": "LinearSVC",
+      "accuracy": 0.7932960893854749,
+      "precision": 0.6811594202898551,
+      "recall": 0.7580645161290323,
+      "f1": 0.7175572519083969,
+      "confusion_matrix": [
+        [
+          95,
+          22
+        ],
+        [
+          15,
+          47
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 0.8636363636363636,
+          "recall": 0.811965811965812,
+          "f1-score": 0.8370044052863436,
+          "support": 117.0
+        },
+        "1": {
+          "precision": 0.6811594202898551,
+          "recall": 0.7580645161290323,
+          "f1-score": 0.7175572519083969,
+          "support": 62.0
+        },
+        "accuracy": 0.7932960893854749,
+        "macro avg": {
+          "precision": 0.7723978919631094,
+          "recall": 0.7850151640474221,
+          "f1-score": 0.7772808285973702,
+          "support": 179.0
+        },
+        "weighted avg": {
+          "precision": 0.8004320592370143,
+          "recall": 0.7932960893854749,
+          "f1-score": 0.7956316482504068,
+          "support": 179.0
+        }
+      },
+      "evaluation_type": "holdout"
+    }
+  ],
+  "best_naive_bayes": "MultinomialNB",
+  "enhanced_cv_results": [
+    {
+      "candidate": "LinearSVC__tfidf_unigram",
+      "best_params": {
+        "model__C": 0.1
+      },
+      "cv_accuracy_mean": 0.821619225844578,
+      "cv_precision_mean": 0.7525414585414585,
+      "cv_recall_mean": 0.7224489795918367,
+      "cv_f1_mean": 0.736035386630862,
+      "holdout_accuracy": 0.8715083798882681,
+      "holdout_precision": 0.819672131147541,
+      "holdout_recall": 0.8064516129032258,
+      "holdout_f1": 0.8130081300813008
+    },
+    {
+      "candidate": "LogisticRegression__tfidf_unigram",
+      "best_params": {
+        "model__C": 1.0
+      },
+      "cv_accuracy_mean": 0.8174037230375258,
+      "cv_precision_mean": 0.7473192067524684,
+      "cv_recall_mean": 0.7142857142857143,
+      "cv_f1_mean": 0.7292339489358122,
+      "holdout_accuracy": 0.8603351955307262,
+      "holdout_precision": 0.8032786885245902,
+      "holdout_recall": 0.7903225806451613,
+      "holdout_f1": 0.7967479674796748
+    },
+    {
+      "candidate": "LogisticRegression__count_bigram",
+      "best_params": {
+        "model__C": 0.1
+      },
+      "cv_accuracy_mean": 0.8005909583374372,
+      "cv_precision_mean": 0.6860487855619701,
+      "cv_recall_mean": 0.7795918367346938,
+      "cv_f1_mean": 0.7290602302449228,
+      "holdout_accuracy": 0.8435754189944135,
+      "holdout_precision": 0.7741935483870968,
+      "holdout_recall": 0.7741935483870968,
+      "holdout_f1": 0.7741935483870968
+    },
+    {
+      "candidate": "LogisticRegression__count_unigram",
+      "best_params": {
+        "model__C": 0.1
+      },
+      "cv_accuracy_mean": 0.7893627499261302,
+      "cv_precision_mean": 0.6607233598742942,
+      "cv_recall_mean": 0.8081632653061224,
+      "cv_f1_mean": 0.726102586102586,
+      "holdout_accuracy": 0.8212290502793296,
+      "holdout_precision": 0.7272727272727273,
+      "holdout_recall": 0.7741935483870968,
+      "holdout_f1": 0.75
+    },
+    {
+      "candidate": "LinearSVC__tfidf_bigram",
+      "best_params": {
+        "model__C": 0.1
+      },
+      "cv_accuracy_mean": 0.8187629272136314,
+      "cv_precision_mean": 0.7671996590220458,
+      "cv_recall_mean": 0.6897959183673469,
+      "cv_f1_mean": 0.7244387422722796,
+      "holdout_accuracy": 0.8659217877094972,
+      "holdout_precision": 0.8392857142857143,
+      "holdout_recall": 0.7580645161290323,
+      "holdout_f1": 0.7966101694915254
+    },
+    {
+      "candidate": "LogisticRegression__tfidf_bigram",
+      "best_params": {
+        "model__C": 0.1
+      },
+      "cv_accuracy_mean": 0.8159952723333006,
+      "cv_precision_mean": 0.7526358571740122,
+      "cv_recall_mean": 0.6979591836734694,
+      "cv_f1_mean": 0.7234296778736138,
+      "holdout_accuracy": 0.8603351955307262,
+      "holdout_precision": 0.8032786885245902,
+      "holdout_recall": 0.7903225806451613,
+      "holdout_f1": 0.7967479674796748
+    },
+    {
+      "candidate": "RandomForestClassifier__tfidf_unigram",
+      "best_params": {
+        "model__max_depth": 20,
+        "model__min_samples_split": 2,
+        "model__n_estimators": 200
+      },
+      "cv_accuracy_mean": 0.7823401950162513,
+      "cv_precision_mean": 0.6544609698287895,
+      "cv_recall_mean": 0.7795918367346937,
+      "cv_f1_mean": 0.711028575500813,
+      "holdout_accuracy": 0.8156424581005587,
+      "holdout_precision": 0.7164179104477612,
+      "holdout_recall": 0.7741935483870968,
+      "holdout_f1": 0.7441860465116279
+    },
+    {
+      "candidate": "BernoulliNB__count_bigram",
+      "best_params": {
+        "model__alpha": 0.1
+      },
+      "cv_accuracy_mean": 0.7907121047966118,
+      "cv_precision_mean": 0.6856856180279364,
+      "cv_recall_mean": 0.7428571428571428,
+      "cv_f1_mean": 0.7104751108885645,
+      "holdout_accuracy": 0.8491620111731844,
+      "holdout_precision": 0.7692307692307693,
+      "holdout_recall": 0.8064516129032258,
+      "holdout_f1": 0.7874015748031497
+    },
+    {
+      "candidate": "BernoulliNB__tfidf_bigram",
+      "best_params": {
+        "model__alpha": 0.1
+      },
+      "cv_accuracy_mean": 0.7907121047966118,
+      "cv_precision_mean": 0.6856856180279364,
+      "cv_recall_mean": 0.7428571428571428,
+      "cv_f1_mean": 0.7104751108885645,
+      "holdout_accuracy": 0.8491620111731844,
+      "holdout_precision": 0.7692307692307693,
+      "holdout_recall": 0.8064516129032258,
+      "holdout_f1": 0.7874015748031497
+    },
+    {
+      "candidate": "LinearSVC__count_bigram",
+      "best_params": {
+        "model__C": 0.1
+      },
+      "cv_accuracy_mean": 0.7879542992219049,
+      "cv_precision_mean": 0.6766755083996463,
+      "cv_recall_mean": 0.7428571428571427,
+      "cv_f1_mean": 0.7071988275737459,
+      "holdout_accuracy": 0.8379888268156425,
+      "holdout_precision": 0.7619047619047619,
+      "holdout_recall": 0.7741935483870968,
+      "holdout_f1": 0.768
+    },
+    {
+      "candidate": "RandomForestClassifier__tfidf_bigram",
+      "best_params": {
+        "model__max_depth": 20,
+        "model__min_samples_split": 5,
+        "model__n_estimators": 200
+      },
+      "cv_accuracy_mean": 0.7668767851866444,
+      "cv_precision_mean": 0.6306799187690385,
+      "cv_recall_mean": 0.7877551020408162,
+      "cv_f1_mean": 0.6995356685804609,
+      "holdout_accuracy": 0.7988826815642458,
+      "holdout_precision": 0.6911764705882353,
+      "holdout_recall": 0.7580645161290323,
+      "holdout_f1": 0.7230769230769231
+    },
+    {
+      "candidate": "LinearSVC__count_unigram",
+      "best_params": {
+        "model__C": 0.1
+      },
+      "cv_accuracy_mean": 0.7781345415148232,
+      "cv_precision_mean": 0.6589890009564385,
+      "cv_recall_mean": 0.746938775510204,
+      "cv_f1_mean": 0.6987989706939752,
+      "holdout_accuracy": 0.8212290502793296,
+      "holdout_precision": 0.734375,
+      "holdout_recall": 0.7580645161290323,
+      "holdout_f1": 0.746031746031746
+    },
+    {
+      "candidate": "RandomForestClassifier__count_unigram",
+      "best_params": {
+        "model__max_depth": 20,
+        "model__min_samples_split": 2,
+        "model__n_estimators": 100
+      },
+      "cv_accuracy_mean": 0.7641091303063134,
+      "cv_precision_mean": 0.6269609788359788,
+      "cv_recall_mean": 0.7877551020408162,
+      "cv_f1_mean": 0.697404807017113,
+      "holdout_accuracy": 0.8324022346368715,
+      "holdout_precision": 0.7352941176470589,
+      "holdout_recall": 0.8064516129032258,
+      "holdout_f1": 0.7692307692307693
+    },
+    {
+      "candidate": "BernoulliNB__count_unigram",
+      "best_params": {
+        "model__alpha": 0.1
+      },
+      "cv_accuracy_mean": 0.7921008568895893,
+      "cv_precision_mean": 0.7092912353157302,
+      "cv_recall_mean": 0.6857142857142857,
+      "cv_f1_mean": 0.6957401809316451,
+      "holdout_accuracy": 0.8435754189944135,
+      "holdout_precision": 0.7931034482758621,
+      "holdout_recall": 0.7419354838709677,
+      "holdout_f1": 0.7666666666666667
+    },
+    {
+      "candidate": "BernoulliNB__tfidf_unigram",
+      "best_params": {
+        "model__alpha": 0.1
+      },
+      "cv_accuracy_mean": 0.7921008568895893,
+      "cv_precision_mean": 0.7092912353157302,
+      "cv_recall_mean": 0.6857142857142857,
+      "cv_f1_mean": 0.6957401809316451,
+      "holdout_accuracy": 0.8435754189944135,
+      "holdout_precision": 0.7931034482758621,
+      "holdout_recall": 0.7419354838709677,
+      "holdout_f1": 0.7666666666666667
+    },
+    {
+      "candidate": "RandomForestClassifier__count_bigram",
+      "best_params": {
+        "model__max_depth": 20,
+        "model__min_samples_split": 2,
+        "model__n_estimators": 200
+      },
+      "cv_accuracy_mean": 0.7711612331330641,
+      "cv_precision_mean": 0.6451587878286963,
+      "cv_recall_mean": 0.7551020408163265,
+      "cv_f1_mean": 0.6950085938424677,
+      "holdout_accuracy": 0.8435754189944135,
+      "holdout_precision": 0.7741935483870968,
+      "holdout_recall": 0.7741935483870968,
+      "holdout_f1": 0.7741935483870968
+    },
+    {
+      "candidate": "MultinomialNB__count_unigram",
+      "best_params": {
+        "model__alpha": 0.1
+      },
+      "cv_accuracy_mean": 0.7991628090219639,
+      "cv_precision_mean": 0.7552180252855422,
+      "cv_recall_mean": 0.6244897959183673,
+      "cv_f1_mean": 0.680710766559294,
+      "holdout_accuracy": 0.8547486033519553,
+      "holdout_precision": 0.8461538461538461,
+      "holdout_recall": 0.7096774193548387,
+      "holdout_f1": 0.7719298245614035
+    },
+    {
+      "candidate": "MultinomialNB__count_bigram",
+      "best_params": {
+        "model__alpha": 0.1
+      },
+      "cv_accuracy_mean": 0.7948882103811681,
+      "cv_precision_mean": 0.7389357304653756,
+      "cv_recall_mean": 0.6326530612244898,
+      "cv_f1_mean": 0.6793437038795451,
+      "holdout_accuracy": 0.8603351955307262,
+      "holdout_precision": 0.8363636363636363,
+      "holdout_recall": 0.7419354838709677,
+      "holdout_f1": 0.7863247863247863
+    },
+    {
+      "candidate": "MultinomialNB__tfidf_unigram",
+      "best_params": {
+        "model__alpha": 0.1
+      },
+      "cv_accuracy_mean": 0.7949473062149118,
+      "cv_precision_mean": 0.8054050312432665,
+      "cv_recall_mean": 0.5387755102040817,
+      "cv_f1_mean": 0.642329444136673,
+      "holdout_accuracy": 0.8268156424581006,
+      "holdout_precision": 0.8604651162790697,
+      "holdout_recall": 0.5967741935483871,
+      "holdout_f1": 0.7047619047619048
+    },
+    {
+      "candidate": "MultinomialNB__tfidf_bigram",
+      "best_params": {
+        "model__alpha": 0.1
+      },
+      "cv_accuracy_mean": 0.7907121047966118,
+      "cv_precision_mean": 0.8391385099239237,
+      "cv_recall_mean": 0.49387755102040815,
+      "cv_f1_mean": 0.6176211159371867,
+      "holdout_accuracy": 0.8491620111731844,
+      "holdout_precision": 0.926829268292683,
+      "holdout_recall": 0.6129032258064516,
+      "holdout_f1": 0.7378640776699029
+    }
+  ],
+  "best_cv_candidate": {
+    "candidate": "LinearSVC__tfidf_unigram",
+    "best_params": {
+      "model__C": 0.1
+    },
+    "cv_accuracy_mean": 0.821619225844578,
+    "cv_precision_mean": 0.7525414585414585,
+    "cv_recall_mean": 0.7224489795918367,
+    "cv_f1_mean": 0.736035386630862
+  },
+  "final_model_metrics": {
+    "model_name": "LinearSVC__tfidf_unigram",
+    "accuracy": 0.8715083798882681,
+    "precision": 0.819672131147541,
+    "recall": 0.8064516129032258,
+    "f1": 0.8130081300813008,
+    "confusion_matrix": [
+      [
+        106,
+        11
+      ],
+      [
+        12,
+        50
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.8983050847457628,
+        "recall": 0.905982905982906,
+        "f1-score": 0.902127659574468,
+        "support": 117.0
+      },
+      "1": {
+        "precision": 0.819672131147541,
+        "recall": 0.8064516129032258,
+        "f1-score": 0.8130081300813008,
+        "support": 62.0
+      },
+      "accuracy": 0.8715083798882681,
+      "macro avg": {
+        "precision": 0.8589886079466519,
+        "recall": 0.8562172594430659,
+        "f1-score": 0.8575678948278844,
+        "support": 179.0
+      },
+      "weighted avg": {
+        "precision": 0.8710690896447026,
+        "recall": 0.8715083798882681,
+        "f1-score": 0.871259442655047,
+        "support": 179.0
+      }
+    },
+    "evaluation_type": "holdout_final"
+  },
+  "selection_rationale": "Selected LinearSVC__tfidf_unigram using the highest mean training-set CV positive-class F1 (0.7360), with CV accuracy as the tie-breaker. Its holdout F1 (0.8130) is reported as an out-of-sample evaluation and was not used for selection.",
+  "artifact_paths": {
+    "model": "models/playstore_review_sentiment_model.joblib",
+    "metrics_json": "models/playstore_review_sentiment_metrics.json",
+    "report_markdown": "reports/model_evaluation_report.md",
+    "confusion_matrix_png": "reports/confusion_matrix.png"
+  },
+  "misclassified_examples": {
+    "false_positives": [
+      {
+        "review": "the new theme is not compatible with my device :( (samsung galaxy j1) make it compatible please. i really love this game.",
+        "actual": 0,
+        "predicted": 1
+      },
+      {
+        "review": "i used to play this game almost 5 years ago and it was my absolute favorite! i recently re-installed it and i got to say, it's very slow and this will be the third time in less than a month that i've lost my boosters.... i have paid for them and it gets taken out of my account but i still don't have them!! i really love this game, please fix the app because it's such a great game. get with the program guys, it's just so slow! besides that we love this game.",
+        "actual": 0,
+        "predicted": 1
+      },
+      {
+        "review": "mark i found viber to be extremely efficient way to communicate with my loved one. i have skype as well but it's not as good as viber.",
+        "actual": 0,
+        "predicted": 1
+      },
+      {
+        "review": "was great i was going to give this 5 stars until the latest update causes it to constantly crash and force close. please fix it! i love playing this game!",
+        "actual": 0,
+        "predicted": 1
+      },
+      {
+        "review": "always fun, but... i like this new frozen shadows, but the depth perception is not so good. it's hard to see an approaching corner. other then that small bug, i love this game and will continue to play it.",
+        "actual": 0,
+        "predicted": 1
+      },
+      {
+        "review": "awesome game but... this is such a great game but there are way to many adds every time you get passed a level there's another add but even with all the adds it's still an amazing game",
+        "actual": 0,
+        "predicted": 1
+      },
+      {
+        "review": "no upgrades to the game till yet...the developers have no idea how to do upgrades.... most of the people have stopped playing it because it got old and there is no fun playing it now...",
+        "actual": 0,
+        "predicted": 1
+      },
+      {
+        "review": "neat idea, but let-down by no linux support. an application like evernote is only as useful as the service behind it, and the service behind a concept like evernote is only as useful as the availability of an application or program to connect to said service... which is where evernote fails - it is not natively available for linux-based operating systems (such as ubuntu). sure, the android application works well enough - but when the only way to access evernote under a linux-based operating system is via a web browser, it quickly looses its appeal.",
+        "actual": 0,
+        "predicted": 1
+      },
+      {
+        "review": "why what's app does not support same account on multiple devices that's security but that's not good i buy a new phn sometimes i used to go with any phn then i have to switch to that that's not good should support same account on multiple devices",
+        "actual": 0,
+        "predicted": 1
+      },
+      {
+        "review": "often painfully slow. needs a useful tablet ui, quick reply, and the ability to send video. some of these are features the ios version has had for almost 2 years and that isn't really excusable from the company that runs android. this is the kind of thing that makes people switch to ios or makes android phone lovers buy ipads instead of android tablets.",
+        "actual": 0,
+        "predicted": 1
+      },
+      {
+        "review": "it's useful a great app and pretty much an essential part of my organization. a minor complaint is that the desktop program doesn't look as appealing as the mobile app, and that the mobile version is lacking some useful functions (e.g. the ability to delete tags, or to strikethrough text).",
+        "actual": 0,
+        "predicted": 1
+      }
+    ],
+    "false_negatives": [
+      {
+        "review": "great features, but my notifications don't work title says it all, the app says i should be getting the notifications on my phone but i'm not getting any. would rate 5 stars if this was resolved.",
+        "actual": 1,
+        "predicted": 0
+      },
+      {
+        "review": "installed and immediately deleted this crap i have used firefox on my desktop for longer then i can remember and i will continue to only use it on my desktop. your only options for a homepage are the crap they want you to see or a blank page with nothing on it and you can't go to a bookmarked website unless you want to go back to their crappy homepage just to see your bookmark list.  and did i mention it's crap?",
+        "actual": 1,
+        "predicted": 0
+      },
+      {
+        "review": "it's alright\u0111\u009f\u0098\u00a4 i don't get to go on the cross wire i've got to 200 000 why why why.,\u0111\u009f\u0098\u02d8\u0111\u009f\u0092\u0080\u0111\u009f\u0092\u0080\u0111\u009f\u0092\u0080\u0111\u009f\u0092\u0080\u00e2\u009a\u00a0\u00e2\u009a\u00a0\u00e2\u009a\u00a0\u0111\u009f\u0089\u0090\u0111\u009f\u0088\u013e\u0111\u009f\u0088\u015f\u0111\u009f\u0089\u0091\u0103\u008a\u0099\u0111\u009f\u0089\u0090\u0111\u009f\u0094\u0087i forgot to tell u no sound on this game ........i hate it",
+        "actual": 1,
+        "predicted": 0
+      },
+      {
+        "review": "uc hello uc browser i  start uc browser it s open when i type search bar web address it s loading loading it s not showing any thing but if i use vpn its working well  it happen oman lost 2 week so kindly find the solution",
+        "actual": 1,
+        "predicted": 0
+      },
+      {
+        "review": "too many ads far more adverts than any other game i've played. i know it's free and they need the ads to make a profit but there needs to be a balance.",
+        "actual": 1,
+        "predicted": 0
+      },
+      {
+        "review": "umm.... while this game has gotten kinda old, and i've basically replaced it with the soda saga game, i still like playing this but for some reason, for i don't know how many days now, every time i go to open this game it'll load a little and then crash closed. fix please!!!!!!!!",
+        "actual": 1,
+        "predicted": 0
+      },
+      {
+        "review": "almost, but not quite. this has so much potential, but i really would like a back function that works, i press back and wait, nothing happens. i press back again and it takes me to the homepage,  same for the back button on the tablet,  i'm using a 1st gen nexus 7.",
+        "actual": 1,
+        "predicted": 0
+      },
+      {
+        "review": "viber s.a.r.l. this app helps me to stay in contact while also having video options and picture options. really nice app and pretty stable running. just a few video and audio issues as well as video and call drops which can be annoying. sometimes the app is unstable but is mostly attributed to network issues rather than the app itself. i recommend this app.",
+        "actual": 1,
+        "predicted": 0
+      },
+      {
+        "review": "really cool and organized. the new update is really amazing, the widgets are cool, however, it would be helpful if you could add right to left reading and writing support (like hebrew, 'cause when i want to add check box the text removed to the left). also, you need to add an option to change the size of the preview (don't like it's so small), and app animations would be nice. something else to your attention: i want to by the app, but it really (really) expensive. if it was cheaper and one time charge i would buy it.",
+        "actual": 1,
+        "predicted": 0
+      },
+      {
+        "review": "i got my opera back. i can see videos now. to me no one wsa better than opera,perhaps there headed there again. thankyou opera. just found single colume view. ok your number one",
+        "actual": 1,
+        "predicted": 0
+      },
+      {
+        "review": "fastest browser it's fast, it's reliable, the only problem i have with it, it don't like to download video's or game's. so both video's & game's it goes to the site just no downloads come up & also the lil emoji's that have action to them, it don't show their lil action. i would give a 5 star rating but until then a 3 star is all. i hate that to cause this really is a fast browser, maybe the fastest. so please fix those bugs!",
+        "actual": 1,
+        "predicted": 0
+      },
+      {
+        "review": "know how to get the account back. you have to delete clash of clans,then you download it again, then you look on the upper left corner of the screen, then you see already have a village?'' then you press it,then you will have your village.",
+        "actual": 1,
+        "predicted": 0
+      }
+    ]
+  }
+}

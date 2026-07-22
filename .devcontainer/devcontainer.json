@@ -10,7 +10,8 @@
 	"features": {
 		"ghcr.io/devcontainers/features/sshd:1": {
 			"version": "latest"
-		}
+		},
+		"ghcr.io/va-h/devcontainers-features/uv:1": {}
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -19,7 +20,7 @@
 
 	"onCreateCommand": "cp -n .env.example .env",
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "pip install -r requirements.txt",
+	"postCreateCommand": "uv sync",
 	"shutdownAction": "stopCompose"
 	
 	// Configure tool-specific properties.

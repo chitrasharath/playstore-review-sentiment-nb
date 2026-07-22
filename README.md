@@ -1,112 +1,130 @@
-# Data Science Project Boilerplate
+# Play Store Review Sentiment
 
-This boilerplate is designed to kickstart data science projects by providing a basic setup for database connections, data processing, and machine learning model development. It includes a structured folder organization for your datasets and a set of pre-defined Python packages necessary for most data science tasks.
+Supervised text classification for Google Play Store reviews. The pipeline predicts review polarity (`0` = negative, `1` = positive), compares Naive Bayes and related models, and saves the best full inference pipeline plus an evaluation report.
 
-## Structure
+## What this project does
 
-The project is organized as follows:
+1. Loads `data/raw/playstore_reviews.csv` (`review`, `polarity` only).
+2. Cleans reviews with `strip().str.lower()`.
+3. Uses an 80/20 stratified train/test split (`random_state=42`).
+4. Trains baseline models on `CountVectorizer(stop_words="english")`:
+   - `GaussianNB`, `MultinomialNB`, `BernoulliNB`
+   - `RandomForestClassifier`, `LogisticRegression`, `LinearSVC`
+5. Runs an enhanced search over Count/TF-IDF features with unigram and bigram ranges.
+6. Selects the final model with training-only cross-validated positive-class F1 (accuracy as tie-breaker).
+7. Writes model, metrics, and a Markdown evaluation report.
 
-- **`src/app.py`** → Main Python script where your project will run.
-- **`src/explore.ipynb`** → Notebook for exploration and testing. Once exploration is complete, migrate the clean code to `app.py`.
-- **`src/utils.py`** → Auxiliary functions, such as database connection.
-- **`requirements.txt`** → List of required Python packages.
-- **`models/`** → Will contain your SQLAlchemy model classes.
-- **`data/`** → Stores datasets at different stages:
-  - **`data/raw/`** → Raw data.
-  - **`data/interim/`** → Temporarily transformed data.
-  - **`data/processed/`** → Data ready for analysis.
+Current selected model: **LinearSVC + TF-IDF unigrams**  
+Holdout metrics: accuracy `0.8715`, precision `0.8197`, recall `0.8065`, F1 `0.8130`.
 
+## Project structure
 
-## ⚡ Initial Setup in Codespaces (Recommended)
+```text
+.
+├── ai_plan/                          # Spec and implementation plan
+├── data/raw/playstore_reviews.csv    # Input dataset
+├── models/                           # Saved model + metrics JSON
+├── reports/                          # Evaluation report + confusion matrix
+├── src/
+│   ├── app.py                        # Training, evaluation, persistence
+│   ├── explore.ipynb                 # Explanatory notebook
+│   └── utils.py                      # Optional database helpers
+├── pyproject.toml                    # uv / project dependencies
+├── uv.lock                           # Locked dependency versions
+└── .python-version                   # Python 3.11
+```
 
-No manual setup is required, as **Codespaces is automatically configured** with the predefined files created by the academy for you. Just follow these steps:
+## Prerequisites
 
-1. **Wait for the environment to configure automatically**.
-   - All necessary packages and the database will install themselves.
-   - The automatically created `username` and `db_name` are in the **`.env`** file at the root of the project.
-2. **Once Codespaces is ready, you can start working immediately**.
+- Python 3.11+
+- [uv](https://docs.astral.sh/uv/)
 
+## Setup
 
-## 💻 Local Setup (Only if you can't use Codespaces)
+### Codespaces / Dev Container
 
-**Prerequisites**
-
-Make sure you have Python 3.11+ installed on your machine. You will also need pip to install the Python packages.
-
-**Installation**
-
-Clone the project repository to your local machine.
-
-Navigate to the project directory and install the required Python packages:
+The dev container installs dependencies with `uv sync` on create. After the environment is ready:
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
-**Create a database (if necessary)**
-
-Create a new database within the Postgres engine by customizing and executing the following command:
+### Local setup
 
 ```bash
-$ psql -U postgres -c "DO \$\$ BEGIN 
-    CREATE USER my_user WITH PASSWORD 'my_password'; 
-    CREATE DATABASE my_database OWNER my_user; 
-END \$\$;"
+# Install uv if needed: https://docs.astral.sh/uv/getting-started/installation/
+git clone <repo-url>
+cd playstore-review-sentiment-nb
+uv sync
 ```
-Connect to the Postgres engine to use your database, manipulate tables, and data:
+
+This creates `.venv` and installs the locked packages from `uv.lock`.
+
+## Run the training pipeline
+
+From the repository root:
 
 ```bash
-$ psql -U my_user -d my_database
+uv run python src/app.py
 ```
 
-Once inside PSQL, you can create tables, run queries, insert, update, or delete data, and much more!
+This regenerates:
 
-**Environment Variables**
+- `models/playstore_review_sentiment_model.joblib` — full vectorizer + classifier pipeline
+- `models/playstore_review_sentiment_metrics.json` — metrics and selection details
+- `reports/model_evaluation_report.md` — human-readable evaluation report
+- `reports/confusion_matrix.png` — final-model confusion matrix
 
-Create a .env file in the root directory of the project to store your environment variables, such as your database connection string:
-
-```makefile
-DATABASE_URL="postgresql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DB_NAME>"
-
-#example
-DATABASE_URL="postgresql://my_user:my_password@localhost:5432/my_database"
-```
-
-## Running the Application
-
-To run the application, execute the app.py script from the root directory of the project:
+## Explore in the notebook
 
 ```bash
-python src/app.py
+uv run jupyter notebook src/explore.ipynb
 ```
 
-## Adding Models
+Or open `src/explore.ipynb` in VS Code / Cursor and select the `.venv` kernel.
 
-To add SQLAlchemy model classes, create new Python script files within the models/ directory. These classes should be defined according to your database schema.
+The notebook reuses functions from `src/app.py` for loading, baseline comparison, enhanced candidate evaluation, and final selection.
 
-Example model definition (`models/example_model.py`):
+## Predict a single review
 
-```py
-from sqlalchemy.orm import declarative_base
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+```bash
+uv run python - <<'PY'
+from pathlib import Path
+import sys
+sys.path.insert(0, "src")
+from app import predict_review
 
-Base = declarative_base()
-
-class ExampleModel(Base):
-    __tablename__ = 'example_table'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str] = mapped_column(unique=True)
+print(predict_review("this app is amazing and works perfectly"))
+print(predict_review("the app keeps crashing and is unusable"))
+PY
 ```
 
-## Working with Data
+`0` = negative, `1` = positive.
 
-You can place your raw datasets in the data/raw directory, intermediate datasets in data/interim, and processed datasets ready for analysis in data/processed.
+## Dataset notes
 
-To process data, you can modify the app.py script to include your data processing steps, using pandas for data manipulation and analysis.
+- Source: `data/raw/playstore_reviews.csv`
+- Features: free-text `review` only (`package_name` is not used)
+- Labels: `polarity` in `{0, 1}`
+- Class counts in the validated set: 584 negative, 307 positive (891 rows)
 
-## Contributors
+## Key design choices
 
-This template was built as part of the [Data Science and Machine Learning Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning) by 4Geeks Academy by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Learn more about [4Geeks Academy BootCamp programs](https://4geeksacademy.com/us/programs) here.
+- Vectorizer is fit only on training text (no leakage from the test set).
+- `GaussianNB` receives dense arrays; other models keep sparse matrices.
+- Enhanced candidates are ranked by mean CV F1 on the training split.
+- Holdout accuracy / precision / recall / F1 are reported for diagnostics; they do not drive model selection.
+- The saved artifact is a scikit-learn `Pipeline` so preprocessing and inference stay aligned.
 
-Other templates and resources like this can be found on the school's GitHub page.
+## Evaluation report
+
+After training, open:
+
+[`reports/model_evaluation_report.md`](reports/model_evaluation_report.md)
+
+It includes baseline results, enhanced candidate holdout metrics, the selected model, and the confusion matrix.
+
+## Planning docs
+
+- [`ai_plan/playstore_reviews_model_spec.md`](ai_plan/playstore_reviews_model_spec.md)
+- [`ai_plan/playstore_reviews_implementation_plan.md`](ai_plan/playstore_reviews_implementation_plan.md)
